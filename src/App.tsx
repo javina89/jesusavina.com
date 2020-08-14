@@ -1,10 +1,15 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
-// import { Top } from './Top'
-const Top = lazy(() => import('./Top').then(({ Top }) => ({ default: Top })),)
-const Landing = lazy(() => import('./Landing').then(({ Landing }) => ({ default: Landing })),)
 
-export const App = () => {
+const TopPromise = import('./Top')
+const Top = lazy(() => TopPromise)
+
+const LandingPromise = import('./Landing')
+const Landing = lazy(() => LandingPromise)
+
+// const Landing = lazy(() => import('./Landing').then(({ Landing }) => ({ default: Landing })),)
+
+const App = () => {
     return (
       <>
         {/* <Top />
@@ -38,4 +43,5 @@ export const App = () => {
         </Router>
       </>
     )
-  };
+  }
+  export default App

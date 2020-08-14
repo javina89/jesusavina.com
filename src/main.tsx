@@ -2,7 +2,9 @@ import React, { lazy, Suspense } from 'react'
 import { render } from 'react-dom'
 import './tailwind.css'
 
-const App = lazy(() => import('./App').then(({ App }) => ({ default: App })),)
+const AppPromise = import('./App')
+const App = lazy(() => AppPromise)
+// const App = lazy(() => import('./App').then(({ App }) => ({ default: App })),)
 
 render(
   <React.StrictMode>

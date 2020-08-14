@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-export const Top = () => {
+const Top = () => {
 
     const [time, setTime] = useState((new Date()).toLocaleString('en-US', {
         hour: 'numeric',
@@ -65,3 +65,4 @@ export const Top = () => {
         </nav>
     )
 }
+export default Top

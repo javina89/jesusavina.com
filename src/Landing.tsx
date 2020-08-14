@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Landing = () => {
+const Landing = () => {
     return (
         <main>
             <div className="block text-center text-white">
@@ -14,3 +14,4 @@ export const Landing = () => {
         </main>
     )
 }
+export default Landing
