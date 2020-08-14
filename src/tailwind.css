@@ -5,30 +5,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* poppins-regular - latin */
 @font-face {
   font-family: 'Poppins';
-  src: local('Poppins'), url(../fonts/Poppins-Thin.ttf) format('truetype');
-  font-weight: 100;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: local('Poppins'), url(../fonts/Poppins-Regular.ttf) format('truetype');
+  font-style: normal;
   font-weight: 400;
   font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: local('Poppins'), url(../fonts/Poppins-Bold.ttf) format('truetype');
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: local('Poppins'), url(../fonts/Poppins-Black.ttf) format('truetype');
-  font-weight: 900;
-  font-display: swap;
+  src: url('../fonts/poppins-v12-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Poppins Regular'), local('Poppins-Regular'),
+       url('../fonts/poppins-v12-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/poppins-v12-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/poppins-v12-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/poppins-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/poppins-v12-latin-regular.svg#Poppins') format('svg'); /* Legacy iOS */
 }
