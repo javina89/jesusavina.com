@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
-import { Top } from './Top'
-import { Landing } from './Landing';
+// import { Top } from './Top'
+const Top = lazy(() => import('./Top').then(({ Top }) => ({ default: Top })),)
+const Landing = lazy(() => import('./Landing').then(({ Landing }) => ({ default: Landing })),)
 
 export const App = () => {
     return (
@@ -24,10 +25,14 @@ export const App = () => {
         </Switch>
         <Footer /> */}
         <Router>
-          <Top />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Top />
+          </Suspense>
           <Switch>
             <Route exact path="/">
+            <Suspense fallback={<div>Loading...</div>}>
               <Landing />
+            </Suspense>
             </Route>
           </Switch>
         </Router>
