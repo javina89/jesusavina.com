@@ -1,11 +1,13 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 
-const TopPromise = import('./Top')
-const Top = lazy(() => TopPromise)
+import Top from './Top'
+import Landing from './Landing'
+// const TopPromise = import('./Top')
+// const Top = lazy(() => TopPromise)
 
-const LandingPromise = import('./Landing')
-const Landing = lazy(() => LandingPromise)
+// const LandingPromise = import('./Landing')
+// const Landing = lazy(() => LandingPromise)
 
 // const Landing = lazy(() => import('./Landing').then(({ Landing }) => ({ default: Landing })),)
 
@@ -35,9 +37,9 @@ const App = () => {
           </Suspense>
           <Switch>
             <Route exact path="/">
-            <Suspense fallback={<div>Loading...</div>}>
-              <Landing />
-            </Suspense>
+              <Suspense fallback={<div>Loading...</div>}>
+                <Landing />
+              </Suspense>
             </Route>
           </Switch>
         </Router>
