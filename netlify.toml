@@ -38,4 +38,4 @@
     frame-ancestors 'none';
     '''
     X-Frame-Options: 'DENY'
-    X-Content-Type-Options = "nosniff"
+    X-Content-Type-Options: "nosniff"
