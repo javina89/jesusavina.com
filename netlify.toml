@@ -37,5 +37,5 @@
     connect-src 'none';
     frame-ancestors 'none';
     '''
-    X-Frame-Options: 'DENY'
-    X-Content-Type-Options: "nosniff"
+    X-Frame-Options = 'DENY'
+    X-Content-Type-Options = 'nosniff'
