@@ -10,7 +10,10 @@
     media-src 'none';
     frame-src 'none';
     font-src 'self';
-    connect-src 'none'
+    connect-src 'none';
+    frame-ancestors 'none';
+    X-Frame-Options: DENY
+
     '''
     X-Content-Security-Policy = '''
     default-src 'self';
@@ -21,7 +24,9 @@
     media-src 'none';
     frame-src 'none';
     font-src 'self';
-    connect-src 'none'
+    connect-src 'none';
+    frame-ancestors 'none';
+    X-Frame-Options: DENY
     '''
     X-WebKit-CSP = '''
     default-src 'self';
@@ -32,5 +37,7 @@
     media-src 'none';
     frame-src 'none';
     font-src 'self';
-    connect-src 'none'
+    connect-src 'none';
+    frame-ancestors 'none';
+    X-Frame-Options: DENY
     '''
