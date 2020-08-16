@@ -32,14 +32,10 @@ const App = () => {
         </Switch>
         <Footer /> */}
         <Router>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Top />
-          </Suspense>
+        <Top />
           <Switch>
             <Route exact path="/">
-              <Suspense fallback={<div>Loading...</div>}>
-                <Landing />
-              </Suspense>
+              <Landing />
             </Route>
           </Switch>
         </Router>
