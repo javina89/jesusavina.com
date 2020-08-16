@@ -39,3 +39,11 @@
     '''
     X-Frame-Options = 'DENY'
     X-Content-Type-Options = 'nosniff'
+
+[[headers]]
+  for = "/_assets/*"
+  [headers.values]
+    cache-control = '''
+    public,
+    max-age: 2592000,
+    must-revalidate'''
