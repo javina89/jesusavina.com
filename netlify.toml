@@ -12,9 +12,6 @@
     font-src 'self';
     connect-src 'none';
     frame-ancestors 'none';
-    X-Frame-Options: 'DENY'
-    X-Content-Type-Options = "nosniff"
-
     '''
     X-Content-Security-Policy = '''
     default-src 'self';
@@ -27,8 +24,6 @@
     font-src 'self';
     connect-src 'none';
     frame-ancestors 'none';
-    X-Frame-Options: 'DENY'
-    X-Content-Type-Options = "nosniff"
     '''
     X-WebKit-CSP = '''
     default-src 'self';
@@ -41,6 +36,6 @@
     font-src 'self';
     connect-src 'none';
     frame-ancestors 'none';
+    '''
     X-Frame-Options: 'DENY'
     X-Content-Type-Options = "nosniff"
-    '''
