@@ -21,4 +21,4 @@ Production
 
 Achievements
 1. PageSpeed Insights score of 100.
-2. To Do: Mozilla Observatory
+2. Mozilla Observatory score of A+.
