@@ -1,16 +1,17 @@
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
 import './tailwind.css'
 import App from './App'
-// const AppPromise = import('./App')
-// const App = lazy(() => AppPromise)
-// const App = lazy(() => import('./App').then(({ App }) => ({ default: App })),)
+
+const time = (new Date()).toLocaleString('en-US', {
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: true
+})
 
 render(
   <React.StrictMode>
-    <Suspense fallback={<div>Loading...</div>}>
-      <App />
-    </Suspense>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 )

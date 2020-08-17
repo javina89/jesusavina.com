@@ -4,8 +4,8 @@ module.exports = {
           colors: {
             'bg-landing': '#2C2A37',
             'theme': 'var(--color-theme)',
-            'night1': '#61DAFB',
-            'day1': '#FFC700',
+            'night': '#61DAFB',
+            'day': '#FFC700',
           },
           fontFamily: {
             'Poppins': 'Poppins',

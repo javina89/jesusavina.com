@@ -43,4 +43,7 @@
 [[headers]]
   for = "/_assets/*"
   [headers.values]
-    Strict-Transport-Security = "max-age=63073000; must-revalidate; preload"
+    cache-control = '''
+    public,
+    max-age: 2592000,
+    must-revalidate'''
