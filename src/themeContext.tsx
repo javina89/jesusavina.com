@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 
 interface ContextProps {
-    theme: string;
+    theme: String;
     toggleTheme: Function;
   }
 
 const ThemeContext = React.createContext<ContextProps>({
-    theme: "",
-    toggleTheme: () => null,
+    theme: "night",
+    toggleTheme: () => null
 })
 
 const ThemeContextProvider = (props: any) => {
