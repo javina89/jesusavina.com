@@ -24,6 +24,26 @@ const Top = () => {
         }
     },[])
 
+    const moon = <svg
+    onClick={toggleTheme}
+    className={`
+    h-12
+    fill-current
+    ${theme === "night"? "text-night" : "text-day"}
+    order-2
+    md:order-3`}
+    viewBox="0 0 122 109" fill="none"><circle cx="49.5" cy="54.5" r="49.5" fill="#61DAFB"/><circle cx="67.5" cy="54.5" r="54" fill="#2C2A37" stroke="#61DAFB"/></svg>
+
+    const sun = <svg
+    onClick={toggleTheme}
+    className={`
+    h-12
+    fill-current
+    ${theme === "night"? "text-night" : "text-day"}
+    order-2
+    md:order-3`}
+    viewBox="0 0 109 109" fill="none"><circle cx="54.5" cy="54.5" r="54.5" fill="#FFC700"/></svg>
+
     return (
         <nav>
             <div
@@ -48,28 +68,17 @@ const Top = () => {
                     {time}
                     </p>
                 <p
-                className="
+                className={`
                 text-white
                 text-lg
                 pt-4
                 order-3
                 md:invisible
                 md:pt-0
-                md:order-2">
+                md:order-2`}>
                     Jesus Avina
                     </p>
-                    <svg
-                    onClick={toggleTheme}
-                    className={`
-                    h-12
-                    fill-current
-                    ${theme === "night"? "text-night" : "text-day"}
-                    order-2
-                    md:order-3`}
-                    viewBox="0 0 77 109"
-                    xmlns="http://www.w3.org/2000/svg">
-                        <path d="M77 108.858c-21.323-8.84-31.5-29.13-31.5-53.65 0-23.273 8.69-44.116 28.297-53.661C45.6 3.204 23.245 26.595 23.245 55.207c0 29.688 24.067 53.755 53.755 53.755v-.104zM11.623 0l2.61 8.031h8.443l-6.831 4.963 2.61 8.032-6.832-4.964-6.832 4.964 2.61-8.031L.568 8.03h8.444L11.623 0z"/>
-                    </svg>
+                    {theme === "night"? moon : sun}
             </div>
         </nav>
     )
