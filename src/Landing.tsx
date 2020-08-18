@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {ThemeContext} from './themeContext'
 
-const Landing = (props) => {
+const Landing = () => {
     const {theme} = useContext(ThemeContext)
     const themeName = theme === "night"? "text-night" : "text-day"
     return (

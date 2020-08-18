@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
 interface ContextProps {
-    theme: String;
-    toggleTheme: Function;
+    theme: String
+    toggleTheme: (event: React.MouseEvent) =>void
   }
 
 const ThemeContext = React.createContext<ContextProps>({
