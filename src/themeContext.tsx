@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
 
+const time = (new Date()).toLocaleString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+  })
+
+const autoTheme = /(10|11|0?[6-9]):[0-5][0-9] (pm)/gi.test(time)? "night" : "day"
+
 interface ContextProps {
     theme: String
     toggleTheme: (event: React.MouseEvent) =>void
@@ -11,13 +19,6 @@ const ThemeContext = React.createContext<ContextProps>({
 })
 
 const ThemeContextProvider = (props: any) => {
-    const time = (new Date()).toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-      })
-
-    const autoTheme = /(10|11|0?[6-9]):[0-5][0-9] (pm)/gi.test(time)? "night" : "day"
 
     const [theme, setTheme] = useState(autoTheme)
 
@@ -32,4 +33,4 @@ const ThemeContextProvider = (props: any) => {
     )
 }
 
-export {ThemeContextProvider, ThemeContext}
+export {ThemeContextProvider, ThemeContext, autoTheme}

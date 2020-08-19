@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react'
-import {ThemeContext} from './themeContext'
+import React, { useEffect, useState, useContext, useRef } from 'react'
+import {ThemeContext, autoTheme} from './themeContext'
+import anime from 'animejs'
 
 const Top = () => {
 
@@ -24,25 +25,67 @@ const Top = () => {
         }
     },[])
 
+    const initialTheme = theme;
+
+    // const themeSVG = document.querySelector('#themeSVG')
+    const themeRef = useRef<SVGSVGElement>(null)
+
+    const themeSwitch = () => {
+        const timeline = anime.timeline({
+            duration: 750,
+            easing: "easOutExpo"
+        })
+
+        timeline.add({
+            targets: ".c1",
+            cx: [
+                {value: theme === "night"? "57": "69.5"}
+            ],
+        })
+        .add({
+            targets: ".c2",
+            r: [
+                {value: theme === "night"? "51": "54.5"}
+            ]
+        })
+        .add({
+            targets: ".ray1",
+            d: [
+                {value: theme === "night"? "": "M69.5 0l6.495 11.25h-12.99L69.5 0zM69.5 139l-6.495-11.25h12.99L69.5 139zM139 68.5l-11.25 6.495v-12.99L139 68.5zM0 68.5l11.25 6.495v-12.99L0 68.5zM20.548 19.993l2.7 12.706 9.655-8.692-12.355-4.014zM119.611 21.018l-2.701 12.707-9.654-8.692 12.355-4.015zM118.91 118.91l-3.362-12.548-9.186 9.186 12.548 3.362zM19.303 118.91l3.362-12.548 9.186 9.186-12.548 3.362z"}
+            ]
+        })
+    }
+
     const moon = <svg
-    onClick={toggleTheme}
+    ref={themeRef}
+    onClick={themeSwitch}
+    id="themeSVG"
     className={`
-    h-12
-    fill-current
-    ${theme === "night"? "text-night" : "text-day"}
     order-2
-    md:order-3`}
-    viewBox="0 0 122 109" fill="none"><circle cx="49.5" cy="54.5" r="49.5" fill="#61DAFB"/><circle cx="67.5" cy="54.5" r="54" fill="#2C2A37" stroke="#61DAFB"/></svg>
+    md:order-3
+    ${theme === "night"? "text-night" : "text-day"}
+    h-12
+    md:h-12`}
+    viewBox="0 0 139 139" fill="none">
+        <circle className="c1" cx="57" cy="69.5" r="54.5" fill="#61DAFB"/>
+        <circle className="c2" cx="69.5" cy="69.5" r="51" fill="#2C2A37" stroke="#61DAFB"/>
+        <path className ="ray1" d=""></path>
+    </svg>
 
     const sun = <svg
     onClick={toggleTheme}
+    id="themeSVG"
     className={`
-    h-12
-    fill-current
-    ${theme === "night"? "text-night" : "text-day"}
     order-2
-    md:order-3`}
-    viewBox="0 0 109 109" fill="none"><circle cx="54.5" cy="54.5" r="54.5" fill="#FFC700"/></svg>
+    md:order-3
+    ${theme === "night"? "text-night" : "text-day"}
+    h-12
+    md:h-12`}
+    viewBox="0 0 139 139" fill="none">
+        <circle className="c1" cx="69.5" cy="69.5" r="54.5" fill="#FFC700"/>
+        <circle className="c2" cx="69.5" cy="69.5" r="54.5" fill="#FFC700"/>
+        <path className ="ray1" d="M69.5 0l6.495 11.25h-12.99L69.5 0zM69.5 139l-6.495-11.25h12.99L69.5 139zM139 68.5l-11.25 6.495v-12.99L139 68.5zM0 68.5l11.25 6.495v-12.99L0 68.5zM20.548 19.993l2.7 12.706 9.655-8.692-12.355-4.014zM119.611 21.018l-2.701 12.707-9.654-8.692 12.355-4.015zM118.91 118.91l-3.362-12.548-9.186 9.186 12.548 3.362zM19.303 118.91l3.362-12.548 9.186 9.186-12.548 3.362z" fill="#FFC700"/>
+    </svg>
 
     return (
         <nav>
@@ -62,6 +105,7 @@ const Top = () => {
                 className={`
                 text-5xl
                 md:text-3xl
+                pb-3
                 ${theme === "night"? "text-night" : "text-day"}
                 order-1
                 `}>
@@ -78,7 +122,7 @@ const Top = () => {
                 md:order-2`}>
                     Jesus Avina
                     </p>
-                    {theme === "night"? moon : sun}
+                {autoTheme === "night"? moon : sun}
             </div>
         </nav>
     )
