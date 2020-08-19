@@ -28,37 +28,51 @@ const Top = () => {
     const initialTheme = theme;
 
     // const themeSVG = document.querySelector('#themeSVG')
-    const themeRef = useRef<SVGSVGElement>(null)
+    // const themeRef = useRef<SVGSVGElement>(null)
 
     const themeSwitch = () => {
-        const timeline = anime.timeline({
+        anime.timeline({
             duration: 750,
-            easing: "easOutExpo"
+            easing: "linear"
         })
-
-        timeline.add({
+        .add({
             targets: ".c1",
             cx: [
-                {value: theme === "night"? "57": "69.5"}
+                {value: theme === "night"? 69.5: 57}
             ],
+            fill: [
+                {value: theme === "night"? "#2C2A37": "#61DAFB"}
+            ]
         })
         .add({
             targets: ".c2",
             r: [
-                {value: theme === "night"? "51": "54.5"}
+                {value: theme === "night"? 54.5: 51}
+            ],
+            fill: [
+                {value: theme === "night"? "#FFC700": "#2C2A37"}
             ]
         })
         .add({
             targets: ".ray1",
             d: [
-                {value: theme === "night"? "": "M69.5 0l6.495 11.25h-12.99L69.5 0zM69.5 139l-6.495-11.25h12.99L69.5 139zM139 68.5l-11.25 6.495v-12.99L139 68.5zM0 68.5l11.25 6.495v-12.99L0 68.5zM20.548 19.993l2.7 12.706 9.655-8.692-12.355-4.014zM119.611 21.018l-2.701 12.707-9.654-8.692 12.355-4.015zM118.91 118.91l-3.362-12.548-9.186 9.186 12.548 3.362zM19.303 118.91l3.362-12.548 9.186 9.186-12.548 3.362z"}
+                {value: theme === "night"? "M69.5 0l6.495 11.25h-12.99L69.5 0zM69.5 139l-6.495-11.25h12.99L69.5 139zM139 68.5l-11.25 6.495v-12.99L139 68.5zM0 68.5l11.25 6.495v-12.99L0 68.5zM20.548 19.993l2.7 12.706 9.655-8.692-12.355-4.014zM119.611 21.018l-2.701 12.707-9.654-8.692 12.355-4.015zM118.91 118.91l-3.362-12.548-9.186 9.186 12.548 3.362zM19.303 118.91l3.362-12.548 9.186 9.186-12.548 3.362z": "M10 10"}
             ]
         })
     }
 
+    // const themeSwitch = () => {
+    //     anime({
+    //         targets: '.c1',
+    //         cx: [
+    //             {value: 5}
+    //         ]
+    //     })
+    // }
+
     const moon = <svg
-    ref={themeRef}
-    onClick={themeSwitch}
+    // ref={themeRef}
+    onClick={(event) => {toggleTheme(event); themeSwitch();}}
     id="themeSVG"
     className={`
     order-2
@@ -73,7 +87,7 @@ const Top = () => {
     </svg>
 
     const sun = <svg
-    onClick={toggleTheme}
+    onClick={(event) => {toggleTheme(event); themeSwitch();}}
     id="themeSVG"
     className={`
     order-2
