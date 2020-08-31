@@ -1,105 +1,226 @@
 import React, { useEffect, useState, useContext, useRef } from 'react'
 import {ThemeContext, autoTheme} from './themeContext'
-import anime from 'animejs'
+import { motion } from "framer-motion"
 
 const Top = () => {
+    console.log("top")
 
     const {theme, toggleTheme} = useContext(ThemeContext)
 
-    const [time, setTime] = useState((new Date()).toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-      }))
-
-    useEffect(()=> {
-        const timer = setInterval(() => {
-            setTime((new Date()).toLocaleString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true
-              }))
-        }, 1000)
-        return () => {
-            clearInterval(timer)
-        }
-    },[])
-
-    const initialTheme = theme;
-
-    // const themeSVG = document.querySelector('#themeSVG')
-    // const themeRef = useRef<SVGSVGElement>(null)
-
-    const themeSwitch = () => {
-        anime.timeline({
-            duration: 750,
-            easing: "linear"
-        })
-        .add({
-            targets: ".c1",
-            cx: [
-                {value: theme === "night"? 69.5: 57}
-            ],
-            fill: [
-                {value: theme === "night"? "#2C2A37": "#61DAFB"}
-            ]
-        })
-        .add({
-            targets: ".c2",
-            r: [
-                {value: theme === "night"? 54.5: 51}
-            ],
-            fill: [
-                {value: theme === "night"? "#FFC700": "#2C2A37"}
-            ]
-        })
-        .add({
-            targets: ".ray1",
-            d: [
-                {value: theme === "night"? "M69.5 0l6.495 11.25h-12.99L69.5 0zM69.5 139l-6.495-11.25h12.99L69.5 139zM139 68.5l-11.25 6.495v-12.99L139 68.5zM0 68.5l11.25 6.495v-12.99L0 68.5zM20.548 19.993l2.7 12.706 9.655-8.692-12.355-4.014zM119.611 21.018l-2.701 12.707-9.654-8.692 12.355-4.015zM118.91 118.91l-3.362-12.548-9.186 9.186 12.548 3.362zM19.303 118.91l3.362-12.548 9.186 9.186-12.548 3.362z": "M10 10"}
-            ]
-        })
+    const getTime = () => {
+        return (new Date()).toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+          })
     }
 
-    // const themeSwitch = () => {
-    //     anime({
-    //         targets: '.c1',
-    //         cx: [
-    //             {value: 5}
-    //         ]
-    //     })
-    // }
+    const getSeconds = () => {
+        return ((60 -
+            Number(
+              new Date().toLocaleString("en-US", {
+                second: "numeric"
+              })
+            )) *
+            1000)
+    }
+      
+    const [time, setTime] = useState(getTime)
 
-    const moon = <svg
-    // ref={themeRef}
-    onClick={(event) => {toggleTheme(event); themeSwitch();}}
-    id="themeSVG"
+    useEffect(()=> {
+        console.log("useEffect")
+        const timer = setTimeout(() => {
+            setTime(getTime)
+        }, getSeconds())
+
+        return () => {
+            console.log("Cleanup");
+            clearTimeout(timer);
+        }
+    }, [time])
+
+
+    const [night, setNight] = useState(theme === "night"? true: false)
+
+    const svgThemeVariants = {
+        night: {
+
+        },
+        day: {
+
+        },
+        turnNight: {
+
+        },
+        turnDay: {
+            
+        }
+    }
+
+    const rayPathVariants = {
+        night: {
+            opacity: 0
+        },
+        day: {
+            opacity: 1,
+            // rotate: 360,
+            // transition:{ 
+            //     rotate: {loop: Infinity, ease: "linear", duration: 20 }
+            // }
+        },
+        turnNight: {
+            opacity: 0,
+            // rotate: 360,
+            transition:{ 
+                opacity: {duration: .2},
+                rotate: {delay: 0, loop: 0, ease: "linear", duration: 2 }
+            }
+        },
+        turnDay: {
+            opacity: 1,
+            rotate: 360,
+            transition:{ 
+                opacity: {duration: .2},
+                // rotate: {repeat: 10, repeatType: "loop", ease: "linear",
+                rotate: {loop: Infinity, ease: "linear", duration: 2 }
+                // after several clicks it will get slower
+            }
+        }
+    }
+
+    const shadowPathVariants = {
+        night: {
+            opacity: 1
+        },
+        day: {
+            opacity: 0
+        },
+        turnNight: {
+            opacity: 1,
+            transition:{ 
+                opacity: {duration: .2},
+            }
+        },
+        turnDay: {
+            opacity: 0,
+            transition:{ 
+                opacity: {duration: .2},
+            }
+        }
+    }
+
+    const facePathVariants = {
+        night: {
+            fill:"#61DAFB"
+        },
+        day: {
+            fill:"#FFC700"
+        },
+        turnNight: {
+            fill:"#61DAFB",
+            transition:{ 
+                fill: {duration: .2},
+            }
+        },
+        turnDay: {
+            fill:"#FFC700",
+            transition:{ 
+                fill: {duration: .2},
+            }
+        }
+    }
+
+    const eyePathVariants = {
+        night: {
+            fill:"#61DAFB"
+        },
+        day: {
+            fill:"#2C2A37"
+        },
+        turnNight: {
+            fill:"#61DAFB",
+            transition:{ 
+                fill: {duration: .2},
+            }
+        },
+        turnDay: {
+            fill:"#2C2A37",
+            transition:{ 
+                fill: {duration: .2},
+            }
+        }
+    }
+
+    const smilePathVariants = {
+        night: {
+            stroke:"#61DAFB"
+        },
+        day: {
+            stroke:"#2C2A37"
+        },
+        turnNight: {
+            stroke:"#61DAFB",
+            transition:{ 
+                fill: {duration: .2},
+            }
+        },
+        turnDay: {
+            stroke:"#2C2A37",
+            transition:{ 
+                fill: {duration: .2},
+            }
+        }
+    }
+
+
+    const themeSVG = <motion.svg
+    variants={svgThemeVariants}
+    initial={night? "night": "day"}
+    animate={night? "turnNight": "turnDay"}
+    // onTap={night? "nightTap": "dayTap"}
+    onClick={(event) => {
+        toggleTheme(event);
+        setNight(!night);}
+    }
     className={`
     order-2
     md:order-3
     ${theme === "night"? "text-night" : "text-day"}
     h-12
     md:h-12`}
-    viewBox="0 0 139 139" fill="none">
-        <circle className="c1" cx="57" cy="69.5" r="54.5" fill="#61DAFB"/>
-        <circle className="c2" cx="69.5" cy="69.5" r="51" fill="#2C2A37" stroke="#61DAFB"/>
-        <path className ="ray1" d=""></path>
-    </svg>
+    viewBox="0 0 215 215"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-miterlimit="1.5">
+        <motion.path
+        variants={rayPathVariants}
+        className="origin-center"
+        // animate="animate"
+        d="M92.879 53.401c0-29.473 6.474-53.4 14.449-53.4s14.45 23.927 14.45 53.4c14.736-25.524 32.308-43.009 39.214-39.022 6.907 3.988.55 27.947-14.187 53.472 25.525-14.737 49.484-21.094 53.472-14.187 3.987 6.906-13.498 24.478-39.022 39.214 29.473 0 53.4 6.475 53.4 14.45s-23.927 14.45-53.4 14.45c25.524 14.736 43.009 32.307 39.022 39.214-3.988 6.906-27.947.55-53.472-14.187 14.737 25.524 21.094 49.484 14.187 53.472-6.906 3.987-24.478-13.498-39.214-39.022 0 29.472-6.475 53.401-14.45 53.401s-14.45-23.929-14.45-53.4c-14.736 25.523-32.307 43.008-39.214 39.021-6.906-3.988-.55-27.948 14.187-53.472-25.524 14.736-49.484 21.093-53.472 14.187-3.987-6.907 13.498-24.478 39.022-39.215C23.929 121.777 0 115.303 0 107.328s23.929-14.45 53.4-14.45C27.878 78.142 10.393 60.57 14.38 53.664c3.988-6.907 27.948-.55 53.472 14.187C53.115 42.326 46.758 18.367 53.664 14.38c6.907-3.987 24.478 13.498 39.215 39.022z" fill="#ffbf00"/>
+    
+        <motion.circle
+        variants={facePathVariants}
+        cx="453.614" cy="183.614" r="83.614" fill="#ffbf00" transform="matrix(.95678 0 0 .95678 -326.679 -68.35)"/>
+    
+        <motion.circle
+        variants={shadowPathVariants}
+        cx="453.614" cy="183.614" r="83.614" fill="#2C2A37" transform="matrix(.95678 0 0 .95678 -306.679 -68.35)"/>
+    
+        <motion.circle
+        variants={eyePathVariants}
+        cx="293.383" cy="170.88" r="7.383" transform="translate(-208.979 -79.606)"/>
+    
+        <motion.circle
+        variants={eyePathVariants}
+        cx="293.383" cy="170.88" r="7.383" transform="translate(-166.055 -79.606)"/>
+        
+        <motion.path
+        variants={smilePathVariants}
+        d="M79.828 127.242c18.333 17.25 36.667 19.782 55 0" fill="none" stroke="#000" stroke-width="3"/>
 
-    const sun = <svg
-    onClick={(event) => {toggleTheme(event); themeSwitch();}}
-    id="themeSVG"
-    className={`
-    order-2
-    md:order-3
-    ${theme === "night"? "text-night" : "text-day"}
-    h-12
-    md:h-12`}
-    viewBox="0 0 139 139" fill="none">
-        <circle className="c1" cx="69.5" cy="69.5" r="54.5" fill="#FFC700"/>
-        <circle className="c2" cx="69.5" cy="69.5" r="54.5" fill="#FFC700"/>
-        <path className ="ray1" d="M69.5 0l6.495 11.25h-12.99L69.5 0zM69.5 139l-6.495-11.25h12.99L69.5 139zM139 68.5l-11.25 6.495v-12.99L139 68.5zM0 68.5l11.25 6.495v-12.99L0 68.5zM20.548 19.993l2.7 12.706 9.655-8.692-12.355-4.014zM119.611 21.018l-2.701 12.707-9.654-8.692 12.355-4.015zM118.91 118.91l-3.362-12.548-9.186 9.186 12.548 3.362zM19.303 118.91l3.362-12.548 9.186 9.186-12.548 3.362z" fill="#FFC700"/>
-    </svg>
+    </motion.svg>
 
     return (
         <nav>
@@ -136,7 +257,8 @@ const Top = () => {
                 md:order-2`}>
                     Jesus Avina
                     </p>
-                {autoTheme === "night"? moon : sun}
+                {/* {autoTheme === "night"? moon : sun} */}
+                {themeSVG}
             </div>
         </nav>
     )

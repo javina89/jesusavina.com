@@ -11,10 +11,8 @@ const time = (new Date()).toLocaleString('en-US', {
 })
 
 render(
-  <React.StrictMode>
-    <ThemeContextProvider>
+  <ThemeContextProvider>
       <App />
-    </ThemeContextProvider>
-  </React.StrictMode>,
+    </ThemeContextProvider>,
   document.getElementById('root')
 )
