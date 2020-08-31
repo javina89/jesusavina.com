@@ -3,6 +3,7 @@
   [headers.values]
     Content-Security-Policy = '''
     default-src 'self';
+    prefetch-src 'data:false;base64,aW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JwppbXBvcnQgeyByZW5kZXIgfSBmcm9tICdyZWFjdC1kb20nCmltcG9ydCAnLi90YWlsd2luZC5jc3MnCmltcG9ydCBBcHAgZnJvbSAnLi9BcHAnCmltcG9ydCB7VGhlbWVDb250ZXh0UHJvdmlkZXJ9IGZyb20gJy4vdGhlbWVDb250ZXh0JwoKY29uc3QgdGltZSA9IChuZXcgRGF0ZSgpKS50b0xvY2FsZVN0cmluZygnZW4tVVMnLCB7CiAgaG91cjogJ251bWVyaWMnLAogIG1pbnV0ZTogJ251bWVyaWMnLAogIGhvdXIxMjogdHJ1ZQp9KQoKcmVuZGVyKAogIDxUaGVtZUNvbnRleHRQcm92aWRlcj4KICAgICAgPEFwcCAvPgogICAgPC9UaGVtZUNvbnRleHRQcm92aWRlcj4sCiAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jvb3QnKQopCg==';
     script-src 'self';
     object-src 'none';
     style-src 'self';
@@ -15,6 +16,7 @@
     '''
     X-Content-Security-Policy = '''
     default-src 'self';
+    prefetch-src 'data:false;base64,aW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JwppbXBvcnQgeyByZW5kZXIgfSBmcm9tICdyZWFjdC1kb20nCmltcG9ydCAnLi90YWlsd2luZC5jc3MnCmltcG9ydCBBcHAgZnJvbSAnLi9BcHAnCmltcG9ydCB7VGhlbWVDb250ZXh0UHJvdmlkZXJ9IGZyb20gJy4vdGhlbWVDb250ZXh0JwoKY29uc3QgdGltZSA9IChuZXcgRGF0ZSgpKS50b0xvY2FsZVN0cmluZygnZW4tVVMnLCB7CiAgaG91cjogJ251bWVyaWMnLAogIG1pbnV0ZTogJ251bWVyaWMnLAogIGhvdXIxMjogdHJ1ZQp9KQoKcmVuZGVyKAogIDxUaGVtZUNvbnRleHRQcm92aWRlcj4KICAgICAgPEFwcCAvPgogICAgPC9UaGVtZUNvbnRleHRQcm92aWRlcj4sCiAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jvb3QnKQopCg==';
     script-src 'self';
     object-src 'none';
     style-src 'self';
@@ -27,6 +29,7 @@
     '''
     X-WebKit-CSP = '''
     default-src 'self';
+    prefetch-src 'data:false;base64,aW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JwppbXBvcnQgeyByZW5kZXIgfSBmcm9tICdyZWFjdC1kb20nCmltcG9ydCAnLi90YWlsd2luZC5jc3MnCmltcG9ydCBBcHAgZnJvbSAnLi9BcHAnCmltcG9ydCB7VGhlbWVDb250ZXh0UHJvdmlkZXJ9IGZyb20gJy4vdGhlbWVDb250ZXh0JwoKY29uc3QgdGltZSA9IChuZXcgRGF0ZSgpKS50b0xvY2FsZVN0cmluZygnZW4tVVMnLCB7CiAgaG91cjogJ251bWVyaWMnLAogIG1pbnV0ZTogJ251bWVyaWMnLAogIGhvdXIxMjogdHJ1ZQp9KQoKcmVuZGVyKAogIDxUaGVtZUNvbnRleHRQcm92aWRlcj4KICAgICAgPEFwcCAvPgogICAgPC9UaGVtZUNvbnRleHRQcm92aWRlcj4sCiAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jvb3QnKQopCg==';
     script-src 'self';
     object-src 'none';
     style-src 'self';
