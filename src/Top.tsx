@@ -63,27 +63,17 @@ const Top = () => {
         },
         day: {
             opacity: 1,
-            // rotate: 360,
-            // transition:{ 
-            //     rotate: {loop: Infinity, ease: "linear", duration: 20 }
-            // }
         },
         turnNight: {
             opacity: 0,
-            // rotate: 360,
             transition:{ 
                 opacity: {duration: .2},
-                // rotate: {delay: 0, loop: 0, ease: "linear", duration: 2 }
             }
         },
         turnDay: {
             opacity: 1,
-            // rotate: 360,
             transition:{ 
                 opacity: {duration: .2},
-                // rotate: {repeat: 40, repeatType: "mirror", ease: "linear", duration: 2}
-                // rotate: {loop: Infinity, ease: "linear", duration: 2 }
-                // after several clicks it will get slower
             }
         }
     }
@@ -177,7 +167,6 @@ const Top = () => {
     variants={svgThemeVariants}
     initial={night? "night": "day"}
     animate={night? "turnNight": "turnDay"}
-    // onTap={night? "nightTap": "dayTap"}
     onClick={(event) => {
         toggleTheme(event);
         setNight(!night);}
@@ -188,16 +177,10 @@ const Top = () => {
     ${theme === "night"? "text-night" : "text-day"}
     h-12
     md:h-12`}
-    viewBox="0 0 215 215"
-    fill-rule="evenodd"
-    clip-rule="evenodd"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-miterlimit="1.5">
+    viewBox="0 0 215 215">
         <motion.path
         variants={rayPathVariants}
         className="origin-center animate-spin-ray"
-        // animate="animate"
         d="M92.879 53.401c0-29.473 6.474-53.4 14.449-53.4s14.45 23.927 14.45 53.4c14.736-25.524 32.308-43.009 39.214-39.022 6.907 3.988.55 27.947-14.187 53.472 25.525-14.737 49.484-21.094 53.472-14.187 3.987 6.906-13.498 24.478-39.022 39.214 29.473 0 53.4 6.475 53.4 14.45s-23.927 14.45-53.4 14.45c25.524 14.736 43.009 32.307 39.022 39.214-3.988 6.906-27.947.55-53.472-14.187 14.737 25.524 21.094 49.484 14.187 53.472-6.906 3.987-24.478-13.498-39.214-39.022 0 29.472-6.475 53.401-14.45 53.401s-14.45-23.929-14.45-53.4c-14.736 25.523-32.307 43.008-39.214 39.021-6.906-3.988-.55-27.948 14.187-53.472-25.524 14.736-49.484 21.093-53.472 14.187-3.987-6.907 13.498-24.478 39.022-39.215C23.929 121.777 0 115.303 0 107.328s23.929-14.45 53.4-14.45C27.878 78.142 10.393 60.57 14.38 53.664c3.988-6.907 27.948-.55 53.472 14.187C53.115 42.326 46.758 18.367 53.664 14.38c6.907-3.987 24.478 13.498 39.215 39.022z" fill="#ffbf00"/>
     
         <motion.circle
@@ -207,7 +190,7 @@ const Top = () => {
         <motion.circle
         variants={shadowPathVariants}
         className="animate-swing-shadow"
-        cx="453.614" cy="183.614" r="83.614" fill="#2C2A37"/>
+        cx="0" cy="0" r="83.614" fill="#2C2A37"/>
     
         <motion.circle
         variants={eyePathVariants}
@@ -219,7 +202,7 @@ const Top = () => {
         
         <motion.path
         variants={smilePathVariants}
-        d="M79.828 127.242c18.333 17.25 36.667 19.782 55 0" fill="none" stroke="#000" stroke-width="3"/>
+        d="M79.828 127.242c18.333 17.25 36.667 19.782 55 0" fill="none" stroke="#000" strokeWidth="3"/>
 
     </motion.svg>
 
@@ -258,7 +241,6 @@ const Top = () => {
                 md:order-2`}>
                     Jesus Avina
                     </p>
-                {/* {autoTheme === "night"? moon : sun} */}
                 {themeSVG}
             </div>
         </nav>

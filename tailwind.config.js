@@ -2,13 +2,13 @@ module.exports = {
     theme: {
         extend: {
           animation: {
-            'spin-ray': 'spin 20s linear infinite',
-            'swing-shadow': 'swing 20s linear infinite',
+            'spin-ray': 'spin 40s linear infinite',
+            'swing-shadow': 'swing 30s linear infinite',
           },
           keyframes: {
             swing: {
-              '0%, 100%': { transform: 'translate(-145%, -35%)' },
-              '50%': { transform: 'translate(-175%, -35%)' },
+              '0%, 100%': { transform: 'translate(35%, 50%)' },
+              '50%': { transform: 'translate(65%, 50%)' },
             }
           },            
           colors: {
