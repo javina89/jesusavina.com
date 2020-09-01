@@ -151,17 +151,50 @@ const Top = () => {
         turnNight: {
             stroke:"#61DAFB",
             transition:{ 
-                fill: {duration: .2},
+                stroke: {duration: .2},
             }
         },
         turnDay: {
             stroke:"#2C2A37",
             transition:{ 
-                fill: {duration: .2},
+                stroke: {duration: .2},
             }
         }
     }
 
+    const timeTextVariants = {
+        night: {
+            color:"#61DAFB"
+        },
+        day: {
+            color:"#FFC700"
+        },
+        turnNight: {
+            color:"#61DAFB",
+            transition:{ 
+                color: {duration: .2},
+            }
+        },
+        turnDay: {
+            color:"#FFC700",
+            transition:{ 
+                color: {duration: .2},
+            }
+        }
+    }
+
+    const timeText = <motion.p
+    variants={timeTextVariants}
+    initial={night? "night": "day"}
+    animate={night? "turnNight": "turnDay"}
+    className={`
+    text-5xl
+    md:text-3xl
+    pb-3
+    order-1
+    `}>
+        {time}
+        </motion.p>
 
     const themeSVG = <motion.svg
     variants={svgThemeVariants}
@@ -172,6 +205,7 @@ const Top = () => {
         setNight(!night);}
     }
     className={`
+    cursor-pointer
     order-2
     md:order-3
     ${theme === "night"? "text-night" : "text-day"}
@@ -220,16 +254,7 @@ const Top = () => {
             md:justify-between
             md:pl-20
             md:pr-20">
-                <p
-                className={`
-                text-5xl
-                md:text-3xl
-                pb-3
-                ${theme === "night"? "text-night" : "text-day"}
-                order-1
-                `}>
-                    {time}
-                    </p>
+                {timeText}
                 <p
                 className={`
                 text-white
