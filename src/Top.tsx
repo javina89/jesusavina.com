@@ -39,9 +39,6 @@ const Top = () => {
         }
     }, [time])
 
-
-    const [night, setNight] = useState(theme === "night"? true: false)
-
     const svgThemeVariants = {
         night: {
 
@@ -185,8 +182,8 @@ const Top = () => {
 
     const timeText = <motion.p
     variants={timeTextVariants}
-    initial={night? "night": "day"}
-    animate={night? "turnNight": "turnDay"}
+    initial={theme === "night"? "night": "day"}
+    animate={theme === "night"? "turnNight": "turnDay"}
     className={`
     text-5xl
     md:text-3xl
@@ -198,11 +195,11 @@ const Top = () => {
 
     const themeSVG = <motion.svg
     variants={svgThemeVariants}
-    initial={night? "night": "day"}
-    animate={night? "turnNight": "turnDay"}
+    initial={theme === "night"? "night": "day"}
+    animate={theme === "night"? "turnNight": "turnDay"}
     onClick={(event) => {
-        toggleTheme(event);
-        setNight(!night);}
+        toggleTheme(event)
+        }
     }
     className={`
     cursor-pointer

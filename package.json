@@ -20,6 +20,8 @@
     "@pika/react": "^16.13.1",
     "@pika/react-dom": "^16.13.1",
     "framer-motion": "^2.4.3-beta.2",
+    "konva": "^7.0.6",
+    "react-konva": "^16.13.0-6",
     "react-router-dom": "^5.2.0",
     "tailwindcss": "^1.6.2"
   },

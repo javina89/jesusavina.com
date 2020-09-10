@@ -1,10 +1,11 @@
-import React, {useState, useContext} from 'react'
+import React, {useContext} from 'react'
 import {ThemeContext} from './themeContext'
 import { motion } from "framer-motion"
+import LandingCanvas from './LandingCanvas'
 
 const Landing = () => {
 
-    const {theme, toggleTheme} = useContext(ThemeContext)
+    const {theme} = useContext(ThemeContext)
 
     const textVariants = {
         night: {
@@ -48,6 +49,7 @@ const Landing = () => {
                     I love React and Serverless Functions
                 </p>
             </div>
+            <LandingCanvas />
         </main>
     )
 }
