@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {ThemeContext} from './themeContext'
 import { motion } from "framer-motion"
-import LandingCanvas from './LandingCanvas'
+import LandingCanvas from './LandingPixi'
 
 const Landing = () => {
 
