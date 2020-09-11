@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {ThemeContext} from './themeContext'
 import { motion } from "framer-motion"
-import LandingCanvas from './LandingPixi'
+import LandingSVG from './LandingSVG'
 
 const Landing = () => {
 
@@ -49,7 +49,7 @@ const Landing = () => {
                     I love React and Serverless Functions
                 </p>
             </div>
-            <LandingCanvas />
+            <LandingSVG />
         </main>
     )
 }
