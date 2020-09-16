@@ -26,7 +26,9 @@ const Landing = () => {
                 color: {duration: .2},
             }
         }
-}
+    }
+
+    const themeColor = theme === "night"? "night": "day"
 
     const timeText = <motion.p
         variants={textVariants}
@@ -48,6 +50,13 @@ const Landing = () => {
                 <p>
                     I love React and Serverless Functions
                 </p>
+                <motion.button
+                initial={{ x: '-70vw' }}
+                animate={{ x: 0 }}
+                transition={{ type: 'spring' }}
+                className={`mt-8 bg-transparent hover:bg-${themeColor} text-${themeColor} font-semibold hover:text-white py-2 px-4 border border-${themeColor} hover:border-transparent rounded`}>
+                    Projects
+                </motion.button>
             </div>
             <LandingSVG />
         </main>
