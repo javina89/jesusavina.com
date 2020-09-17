@@ -59,7 +59,7 @@ const Landing = () => {
                     Projects
                 </motion.button>
             </div>
-            {(window.screen.orientation.type !== ("landscape-primary" || "landscape-secondary") || window.innerWidth > 700) && <LandingSVG />}
+            {(window.screen.orientation.type.charAt(0) !== "l" || window.innerWidth > 700) && <LandingSVG />}
         </main>
     )
 }
