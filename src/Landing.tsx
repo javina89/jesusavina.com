@@ -27,7 +27,6 @@ const Landing = () => {
             }
         }
     }
-    console.log(window.screen.orientation.type)
 
     const themeColor = theme === "night"? "night": "day"
 
