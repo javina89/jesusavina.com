@@ -58,7 +58,7 @@ const Landing = () => {
                     Projects
                 </motion.button>
             </div>
-            <LandingSVG />
+            {((window.innerWidth < 700 && window.innerHeight > window.innerWidth) || window.innerWidth > 700) && <LandingSVG />}
         </main>
     )
 }
