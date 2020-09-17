@@ -49,7 +49,7 @@ const Landing = () => {
     Let's Get {timeText}ive
                 </h1>
                 <p>
-                    I love React and Serverless Functions
+                    I love React and Serverless Functions {window.screen.orientation.type}
                 </p>
                 <motion.button
                 initial={{ x: '-70vw' }}
@@ -59,7 +59,8 @@ const Landing = () => {
                     Projects
                 </motion.button>
             </div>
-            {(window.screen.orientation.type.charAt(0) !== "l" || window.innerWidth > 700) && <LandingSVG />}
+            {/* {(window.screen.orientation.type.charAt(0) !== "l" || window.innerWidth > 700) && <LandingSVG />} */}
+            <LandingSVG />
         </main>
     )
 }
