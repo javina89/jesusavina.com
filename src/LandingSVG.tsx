@@ -21,50 +21,39 @@ const LandingSVG = () => {
 
     // const [canSee, setCanSee] = useState(false)
 
-    // const [canSee, setCanSee] = useState(new Array(20).fill(false))
+    const [canSee, setCanSee] = useState(new Array(20).fill(false))
 
-    const canSee: boolean[] = new Array(20).fill(false)
     const xPos: number[] = new Array(20).fill(0)
     const yPos: number[] = new Array(20).fill(0)
 
-    // useEffect(()=> {
-    //     console.log("useEffectlandingSVG")
-    //     const canSeeNow = canSee
-
-    //     const timer = setTimeout(() => {
-    //         for (let x = 0; x < 20; x++){
-    //             if (canSeeNow[x] === false){
-    //                 // If chance to be true
-    //                 // when going true, have transition animation
-    //                 // true? ternary
-    //                 if (Math.floor(Math.random() * 100) + 1 > 85){
-    //                     canSeeNow.splice(x, 1, true)
-    //                 }
-    //             }
-    //         }
-    //         setCanSee(canSeeNow)
-    //     }, 3000)
-
-    //     return () => {
-    //         console.log("Cleanup");
-    //         clearTimeout(timer);
-    //     }
-    // }, [canSee])
-
-
-    setInterval(() => {
-        console.log(canSee);
-        for (let x = 0; x < 20; x++){
-            if (canSee[x] === false){
-                // If chance to be true
-                // when going true, have transition animation
-                // true? ternary
-                if (Math.floor(Math.random() * 100) + 1 > 85){
-                    canSee.splice(x, 1, true)
+    useEffect(()=> {
+        const timer = setTimeout(() => {
+            console.log(canSee)
+            const canSeeNow = [...canSee]
+            for (let x = 0; x < 20; x++){
+                if (canSeeNow[x] === false){
+                    // If chance to be true
+                    // when going true, have transition animation
+                    // true? ternary
+                    if (Math.floor(Math.random() * 100) + 1 > 85){
+                        canSeeNow.splice(x, 1, true)
+                    }
+                } else {
+                    if (Math.floor(Math.random() * 100) + 1 > 20){
+                        canSeeNow.splice(x, 1, false)
+                    }
                 }
             }
+            console.log(canSee)
+            setCanSee(canSeeNow)
+        }, 3000)
+        // setCanSee(canSeeNow)
+
+        return () => {
+            console.log("Cleanup");
+            clearTimeout(timer);
         }
-      }, 3000);
+    }, [canSee])
 
     const colorPathVariants = {
         night: {
@@ -130,19 +119,22 @@ const LandingSVG = () => {
     }
 
     const starGroupVariants = {
-        start: {
-            opacity: 0
+        night: {
+            y:0
+        },
+        day: {
+            y:"-20vh"
         },
         turnNight: {
-            opacity: 1,
+            y: 0,
             transition:{ 
-                opacity: {duration: .2},
+                y: {duration: .2},
             }
         },
         turnDay: {
-            opacity: 0,
+            y: "-20vh",
             transition:{ 
-                opacity: {duration: .2},
+                y: {duration: .2},
             }
         }
     }
@@ -154,13 +146,13 @@ const LandingSVG = () => {
         turnNight: {
             opacity: 1,
             transition:{ 
-                opacity: {duration: .2},
+                opacity: {duration: .9},
             }
         },
         turnDay: {
             opacity: 0,
             transition:{ 
-                opacity: {duration: .2},
+                opacity: {duration: .9},
             }
         }
     }
@@ -175,7 +167,7 @@ const LandingSVG = () => {
         variants={colorPathVariants}
         initial={theme === "night"? "night": "day"}
         animate={theme === "night"? "turnNight": "turnDay"}
-        className="invisible md:visible absolute inset-x-0 bottom-0" viewBox="0 0 838 335">
+        className="absolute inset-x-0 bottom-0" viewBox="0 0 838 335">
             <motion.path id="NorthWater"
             variants={waterPathVariants}
             d="M1.866,104.419c131.804,-2.938 270.617,-4.204 416.666,-1.234c140.698,-3.858 279.53,-2.503 416.667,1.234l0,24.684l-833.333,0" fill="#01f" stroke="#000" strokeWidth="0.85px"/>
@@ -192,31 +184,109 @@ const LandingSVG = () => {
             <motion.path variants={waterPathVariants}
             id="SouthWater" d="M1.866,315.53c131.804,-2.173 270.617,-3.11 416.666,-0.913c140.698,-2.854 279.53,-1.851 416.667,0.913l0,18.257l-833.333,0" fill="#01f" stroke="#000" strokeWidth="0.85px"/>
             
-            <motion.g id="Stars">
+            <motion.g id="Stars"
+            variants={starGroupVariants}
+            initial={theme === "night"? "night": "day"}>
                 <motion.path id="Star"
                 variants={starPathVariants}
                 initial={"start"}
                 animate={canSee[0] === true? "turnNight": "turnDay"}
                 d="M47.516,4.243l0.941,2.894l3.043,0l-2.462,1.789l0.941,2.895l-2.463,-1.789l-2.462,1.789l0.941,-2.895l-2.463,-1.789l3.044,0l0.94,-2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star1" d="M81.028,20.999l0.941,2.894l3.043,0l-2.462,1.789l0.941,2.895l-2.463,-1.789l-2.462,1.789l0.941,-2.895l-2.462,-1.789l3.043,0l0.94,-2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star2" d="M107.559,0.454l0.94,2.894l3.044,0l-2.462,1.789l0.94,2.895l-2.462,-1.789l-2.462,1.789l0.94,-2.895l-2.462,-1.789l3.043,0l0.941,-2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star3" d="M141.071,17.21l0.94,2.894l3.044,0l-2.462,1.789l0.94,2.895l-2.462,-1.789l-2.462,1.789l0.94,-2.895l-2.462,-1.789l3.043,0l0.941,-2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star4" d="M214.183,66.454l0.941,-2.894l3.043,-0l-2.462,-1.789l0.94,-2.895l-2.462,1.789l-2.462,-1.789l0.94,2.895l-2.462,1.789l3.044,-0l0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star5" d="M247.695,49.698l0.941,-2.894l3.043,-0l-2.462,-1.789l0.94,-2.895l-2.462,1.789l-2.462,-1.789l0.94,2.895l-2.462,1.789l3.044,-0l0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star6" d="M274.226,70.243l0.94,-2.894l3.044,-0l-2.463,-1.789l0.941,-2.895l-2.462,1.789l-2.463,-1.789l0.941,2.895l-2.462,1.789l3.043,-0l0.941,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star7" d="M307.738,53.487l0.94,-2.894l3.044,-0l-2.463,-1.789l0.941,-2.895l-2.462,1.789l-2.463,-1.789l0.941,2.895l-2.462,1.789l3.043,-0l0.941,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star8" d="M623.643,66.454l-0.94,-2.894l-3.044,-0l2.462,-1.789l-0.94,-2.895l2.462,1.789l2.462,-1.789l-0.94,2.895l2.462,1.789l-3.043,-0l-0.941,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star9" d="M590.131,49.698l-0.941,-2.894l-3.043,-0l2.462,-1.789l-0.94,-2.895l2.462,1.789l2.462,-1.789l-0.94,2.895l2.462,1.789l-3.044,-0l-0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star10" d="M563.601,70.243l-0.941,-2.894l-3.043,-0l2.462,-1.789l-0.941,-2.895l2.463,1.789l2.462,-1.789l-0.941,2.895l2.463,1.789l-3.044,-0l-0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star11" d="M530.089,53.487l-0.941,-2.894l-3.043,-0l2.462,-1.789l-0.941,-2.895l2.463,1.789l2.462,-1.789l-0.941,2.895l2.463,1.789l-3.044,-0l-0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star12" d="M376.866,46.104l-2.895,0.941l0,3.043l-1.789,-2.462l-2.894,0.941l1.789,-2.463l-1.789,-2.462l2.894,0.941l1.789,-2.463l0,3.044l2.895,0.94Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star13" d="M360.11,54.617l-2.895,0.94l0,3.043l-1.789,-2.462l-2.894,0.941l1.789,-2.462l-1.789,-2.463l2.894,0.941l1.789,-2.462l0,3.043l2.895,0.941Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star14" d="M460.199,46.104l2.895,0.941l-0,3.043l1.789,-2.462l2.894,0.941l-1.789,-2.463l1.789,-2.462l-2.894,0.941l-1.789,-2.463l-0,3.044l-2.895,0.94Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star15" d="M476.955,54.617l2.895,0.94l-0,3.043l1.789,-2.462l2.894,0.941l-1.789,-2.462l1.789,-2.463l-2.894,0.941l-1.789,-2.462l-0,3.043l-2.895,0.941Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star16" d="M789.548,5.286l-0.94,2.895l-3.044,-0l2.463,1.789l-0.941,2.894l2.462,-1.788l2.463,1.788l-0.941,-2.894l2.462,-1.789l-3.043,-0l-0.941,-2.895Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star17" d="M756.036,22.042l-0.94,2.895l-3.044,0l2.463,1.789l-0.941,2.894l2.462,-1.788l2.463,1.788l-0.941,-2.894l2.462,-1.789l-3.043,0l-0.941,-2.895Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star18" d="M729.506,1.497l-0.94,2.895l-3.044,-0l2.462,1.789l-0.94,2.894l2.462,-1.788l2.462,1.788l-0.94,-2.894l2.462,-1.789l-3.043,-0l-0.941,-2.895Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
-                <path id="Star19" d="M695.994,18.253l-0.941,2.895l-3.043,0l2.462,1.789l-0.94,2.894l2.462,-1.788l2.462,1.788l-0.94,-2.894l2.462,-1.789l-3.044,0l-0.94,-2.895Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[1] === true? "turnNight": "turnDay"}
+                id="Star1" d="M81.028,20.999l0.941,2.894l3.043,0l-2.462,1.789l0.941,2.895l-2.463,-1.789l-2.462,1.789l0.941,-2.895l-2.462,-1.789l3.043,0l0.94,-2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[2] === true? "turnNight": "turnDay"}
+                id="Star2" d="M107.559,0.454l0.94,2.894l3.044,0l-2.462,1.789l0.94,2.895l-2.462,-1.789l-2.462,1.789l0.94,-2.895l-2.462,-1.789l3.043,0l0.941,-2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[3] === true? "turnNight": "turnDay"}
+                id="Star3" d="M141.071,17.21l0.94,2.894l3.044,0l-2.462,1.789l0.94,2.895l-2.462,-1.789l-2.462,1.789l0.94,-2.895l-2.462,-1.789l3.043,0l0.941,-2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[4] === true? "turnNight": "turnDay"}
+                id="Star4" d="M214.183,66.454l0.941,-2.894l3.043,-0l-2.462,-1.789l0.94,-2.895l-2.462,1.789l-2.462,-1.789l0.94,2.895l-2.462,1.789l3.044,-0l0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[5] === true? "turnNight": "turnDay"}
+                id="Star5" d="M247.695,49.698l0.941,-2.894l3.043,-0l-2.462,-1.789l0.94,-2.895l-2.462,1.789l-2.462,-1.789l0.94,2.895l-2.462,1.789l3.044,-0l0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[6] === true? "turnNight": "turnDay"}
+                id="Star6" d="M274.226,70.243l0.94,-2.894l3.044,-0l-2.463,-1.789l0.941,-2.895l-2.462,1.789l-2.463,-1.789l0.941,2.895l-2.462,1.789l3.043,-0l0.941,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[7] === true? "turnNight": "turnDay"}
+                id="Star7" d="M307.738,53.487l0.94,-2.894l3.044,-0l-2.463,-1.789l0.941,-2.895l-2.462,1.789l-2.463,-1.789l0.941,2.895l-2.462,1.789l3.043,-0l0.941,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[8] === true? "turnNight": "turnDay"}
+                id="Star8" d="M623.643,66.454l-0.94,-2.894l-3.044,-0l2.462,-1.789l-0.94,-2.895l2.462,1.789l2.462,-1.789l-0.94,2.895l2.462,1.789l-3.043,-0l-0.941,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[9] === true? "turnNight": "turnDay"}
+                id="Star9" d="M590.131,49.698l-0.941,-2.894l-3.043,-0l2.462,-1.789l-0.94,-2.895l2.462,1.789l2.462,-1.789l-0.94,2.895l2.462,1.789l-3.044,-0l-0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[10] === true? "turnNight": "turnDay"}
+                id="Star10" d="M563.601,70.243l-0.941,-2.894l-3.043,-0l2.462,-1.789l-0.941,-2.895l2.463,1.789l2.462,-1.789l-0.941,2.895l2.463,1.789l-3.044,-0l-0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[11] === true? "turnNight": "turnDay"}
+                id="Star11" d="M530.089,53.487l-0.941,-2.894l-3.043,-0l2.462,-1.789l-0.941,-2.895l2.463,1.789l2.462,-1.789l-0.941,2.895l2.463,1.789l-3.044,-0l-0.94,2.894Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[12] === true? "turnNight": "turnDay"}
+                id="Star12" d="M376.866,46.104l-2.895,0.941l0,3.043l-1.789,-2.462l-2.894,0.941l1.789,-2.463l-1.789,-2.462l2.894,0.941l1.789,-2.463l0,3.044l2.895,0.94Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[13] === true? "turnNight": "turnDay"}
+                id="Star13" d="M360.11,54.617l-2.895,0.94l0,3.043l-1.789,-2.462l-2.894,0.941l1.789,-2.462l-1.789,-2.463l2.894,0.941l1.789,-2.462l0,3.043l2.895,0.941Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[14] === true? "turnNight": "turnDay"}
+                id="Star14" d="M460.199,46.104l2.895,0.941l-0,3.043l1.789,-2.462l2.894,0.941l-1.789,-2.463l1.789,-2.462l-2.894,0.941l-1.789,-2.463l-0,3.044l-2.895,0.94Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[15] === true? "turnNight": "turnDay"}
+                id="Star15" d="M476.955,54.617l2.895,0.94l-0,3.043l1.789,-2.462l2.894,0.941l-1.789,-2.462l1.789,-2.463l-2.894,0.941l-1.789,-2.462l-0,3.043l-2.895,0.941Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[16] === true? "turnNight": "turnDay"}
+                id="Star16" d="M789.548,5.286l-0.94,2.895l-3.044,-0l2.463,1.789l-0.941,2.894l2.462,-1.788l2.463,1.788l-0.941,-2.894l2.462,-1.789l-3.043,-0l-0.941,-2.895Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[17] === true? "turnNight": "turnDay"}
+                id="Star17" d="M756.036,22.042l-0.94,2.895l-3.044,0l2.463,1.789l-0.941,2.894l2.462,-1.788l2.463,1.788l-0.941,-2.894l2.462,-1.789l-3.043,0l-0.941,-2.895Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[18] === true? "turnNight": "turnDay"}
+                id="Star18" d="M729.506,1.497l-0.94,2.895l-3.044,-0l2.462,1.789l-0.94,2.894l2.462,-1.788l2.462,1.788l-0.94,-2.894l2.462,-1.789l-3.043,-0l-0.941,-2.895Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
+                <motion.path
+                variants={starPathVariants}
+                initial={"start"}
+                animate={canSee[19] === true? "turnNight": "turnDay"}
+                id="Star19" d="M695.994,18.253l-0.941,2.895l-3.043,0l2.462,1.789l-0.94,2.894l2.462,-1.788l2.462,1.788l-0.94,-2.894l2.462,-1.789l-3.044,0l-0.94,-2.895Z" fill="#00c2ff" stroke="#000" strokeWidth="0.4px"/>
             </motion.g>
         </motion.svg>
     </>
