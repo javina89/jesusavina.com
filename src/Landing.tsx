@@ -27,6 +27,7 @@ const Landing = () => {
             }
         }
     }
+    console.log(window.screen.orientation.type)
 
     const themeColor = theme === "night"? "night": "day"
 
@@ -58,7 +59,7 @@ const Landing = () => {
                     Projects
                 </motion.button>
             </div>
-            <LandingSVG />
+            {(window.screen.orientation.type !== ("landscape-primary" || "landscape-secondary") && window.innerWidth < 700) && <LandingSVG />}
         </main>
     )
 }
