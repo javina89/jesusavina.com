@@ -7,7 +7,7 @@ module.exports = {
         'landscape': {'raw': '(orientation: landscape)'},
         'portrait': {'raw': '(orientation: portrait)'},
         'mobilelandscape': {
-          'raw': '(orientation: landscape) and (max-width: 700px)',
+          'raw': '(orientation: landscape) and (max-height: 400px)',
         }
       },
         extend: {
