@@ -1,5 +1,15 @@
 module.exports = {
     theme: {
+      maxWidth: {
+        'mobile': '700px',
+              },
+      screens: {
+        'landscape': {'raw': '(orientation: landscape)'},
+        'portrait': {'raw': '(orientation: portrait)'},
+        'mobilelandscape': {
+          'raw': '(orientation: landscape) and (max-width: 700px)',
+        }
+      },
         extend: {
           animation: {
             'spin-ray': 'spin 40s linear infinite',

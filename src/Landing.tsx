@@ -58,7 +58,9 @@ const Landing = () => {
                     Projects
                 </motion.button>
             </div>
-            {window.innerHeight > 400 && <LandingSVG />}
+            <div className={`mobilelandscape:hidden`}>
+                <LandingSVG/>  
+            </div>
         </main>
     )
 }

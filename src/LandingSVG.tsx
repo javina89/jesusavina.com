@@ -167,7 +167,7 @@ const LandingSVG = () => {
         variants={colorPathVariants}
         initial={theme === "night"? "night": "day"}
         animate={theme === "night"? "turnNight": "turnDay"}
-        className="absolute inset-x-0 bottom-0" viewBox="0 0 838 335">
+        className="absolute bottom-0" viewBox="0 0 838 335">
             <motion.path id="NorthWater"
             variants={waterPathVariants}
             d="M1.866,104.419c131.804,-2.938 270.617,-4.204 416.666,-1.234c140.698,-3.858 279.53,-2.503 416.667,1.234l0,24.684l-833.333,0" fill="#01f" stroke="#000" strokeWidth="0.85px"/>
